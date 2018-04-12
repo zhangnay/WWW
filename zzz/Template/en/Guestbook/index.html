@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$guestbooktitle}</title>
+<meta name="keywords" content="{$guestbookkeyword}" />
+<meta name="description" content="{$guestbookdescription}" />
+<link type="text/css" href="__HOME_CSS__/global.css" rel="stylesheet" />
+</head>
+<body>
+<include file="Public:head" />
+<div class="page_banner" style="background:url(__HOME_IMG__/gb_banner.jpg) center no-repeat;"></div>
+<div class="page_floor">
+    <div class="page_kong"></div>
+	<div class="c1200">
+	    <div class="page_left">
+		    <div class="page_left_nav"><img src="__HOME_IMG__/ico_1.png" width="25" align="absmiddle" class="mr10" />{$Think.lang.page}</div>
+<!--左侧菜单开始-->		
+<div class="page_leftnav">
+    <ul>
+        <php>getPageSort(0,4);</php>
+    </ul>
+</div>
+<script language="JavaScript">
+function c(srcelement){
+    var targetid, srcelement, targetelement;
+    targetid = srcelement.id + "d";
+    targetelement = document.getElementById(targetid);
+    if(targetelement.style.display == "none"){
+        srcelement.className = "active";
+        targetelement.style.display = '';
+    }else{
+        srcelement.className = "";
+        targetelement.style.display = "none";
+    }
+}
+</script>
+<!--左侧菜单结束-->		
+			<div class="leftnav"><img src="__HOME_IMG__/contact_ico.jpg" border="0" alt="" class="contact_img" /></div>
+		</div>
+		<div class="page_right">
+		    <div class="page_right_nav">
+			    {$Think.lang.v_position}{$Think.lang.v_home} &gt; {$Think.lang.v_guestbook}
+			</div>
+			<div class="gbook_content">
+			    <form name="guestbook" id="guestbook" onSubmit="return messagecheck();" action="{:U()}" method="post">
+				    <input type="hidden" name="parentid" value="0" />
+					<input type="hidden" name="status" value="0" />
+			        <table width="100%">
+					    <tr><td colspan="2" height="10"></td></tr>
+							    <tr style="display:none">
+								    <td valign="top" width="200">{$Think.lang.v_sort}</td>
+									<td>
+                                        <select name="sortid" onchange="showAttribute(this.value)" autocomplete="off" class="chosen-select select_w">
+								            <foreach name="Sort" item="k">
+											    <php>if($key==0 && empty($rs['sortid'])) $LoadSortID = $k['sortid'];</php>
+                                                <option value="{$k['sortid']}">{$k['html']} {$k['sorttitle']}</option>
+                                            </foreach>
+                                        </select>
+									</td>
+								</tr>
+								<tr style="display:none"><td colspan="2"><div id="attNameValue"></div></td></tr>
+				        <tr>
+					        <td width="200" height="38" align="right" class="pdl10">{$Think.lang.v_title}：</td>
+					      <td><input name="title" id="title" type="text" class="ipt_content" value="" size="58"><span class="red">*（*{$Think.lang.v_required}）</span></td>
+					    </tr>
+				        <tr>
+					        <td width="200" height="38" align="right" class="pdl10">{$Think.lang.v_realname}：</td>
+					      <td><input name="realname" id="realname" type="text" class="ipt_content" value="" size="58"><span class="red">*</span></td>
+					    </tr>
+				        <tr>
+					        <td width="200" height="38" align="right" class="pdl10">{$Think.lang.v_telephone}：</td>
+					      <td><input name="telephone" id="telephone" type="text" class="ipt_content" value="" size="58"></td>
+					    </tr>
+				        <tr>
+					        <td width="200" height="38" align="right" class="pdl10">{$Think.lang.v_mobile}：</td>
+					      <td><input name="mobile" id="mobile" type="text" class="ipt_content" value="" size="58"><span class="red">*</span></td>
+					    </tr>
+				        <tr>
+					        <td width="200" height="38" align="right" class="pdl10">QQ：</td>
+					      <td><input name="qq" id="qq" type="text" class="ipt_content" value="" size="58"></td>
+					    </tr>
+				        <tr>
+					        <td width="200" height="38" align="right" class="pdl10">Email：</td>
+					      <td><input name="email" id="email" type="text" class="ipt_content" value="" size="58"></td>
+					    </tr>
+				        <tr>
+					        <td width="200" height="38" align="right" class="pdl10">{$Think.lang.v_content1}：</td>
+					      <td><textarea name="content" id="content" rows="6" class="gbook_textarea"></textarea><span class="red">*</span></td>
+					    </tr>
+						<tr>
+						    <td width="200" height="38" align="right" class="pdl10">{$Think.lang.v_verify}：</td>
+						  <td><input  name="verify" type="text" size="16" class="ipt_content mr5" placeholder="{$Think.lang.v_write_verify}"><a href="javascript:void(0)"><img class="verify reloadverify" src="{:U(CONTROLLER_NAME.'/verify')}" border="0" width="106" height="28" alt="{$Think.lang.v_refresh}" align="absmiddle" /></a> <span class="red">*</span></td>
+						</tr>
+				        <tr>
+					        <td width="200" class="pdl10" height="38"></td>
+						    <td><input type="submit" name="submit" value="&nbsp; Submit &nbsp;" class="button btn_white" />
+		              <input type="reset" name="reset" value="Reset" class="button btn_white" /></td>
+					    </tr>
+				    </table>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="cp100 h10 clear"></div>
+<script type="text/javascript">
+function messagecheck(){
+  var title=document.guestbook.title.value;
+  var realname=document.guestbook.realname.value;
+  var mobile=document.guestbook.mobile.value;
+  var content=document.guestbook.content.value;
+  if(document.guestbook.title.value==""){
+      alert("{$Think.lang.v_require_title}");
+      document.guestbook.title.focus();
+	  return false;
+  }
+  if(document.guestbook.realname.value==""){
+      alert("{$Think.lang.v_require_realname}");
+      document.guestbook.realname.focus();
+	  return false;
+  }
+  if(document.guestbook.mobile.value==""){
+      alert("{$Think.lang.v_require_mobile}");
+      document.guestbook.mobile.focus();
+	  return false;
+  }
+  if(document.guestbook.content.value==""){
+      alert("{$Think.lang.v_content1}");
+      document.guestbook.content.focus();
+	  return false;
+  }
+}
+</script>
+<script type="text/javascript">
+	$(function(){
+		//刷新验证码
+		var verify = $(".verify").attr("src");
+		$(".reloadverify").click(function(){
+			if( verify.indexOf('?')>0){
+				$(".verify").attr("src", verify+'&random='+Math.random());
+			}else{
+				$(".verify").attr("src", verify.replace(/\?.*$/,'')+'?'+Math.random());
+			}
+		});
+	});
+	
+</script>
+<!--属性开始-->
+<script type="text/javascript">
+jQuery(function($) {
+    showAttribute(<php>echo $LoadSortID;</php>);
+});
+
+var xmlHttp;
+
+function showAttribute(str){ 
+    xmlHttp=GetXmlHttpObject()
+    if(xmlHttp==null){
+        alert ("Browser does not support HTTP Request")
+        return
+    }
+    var url="{:U('Attribute/getAttribute')}"
+    url=url+"?sortid="+str
+    url=url+"&infoid={$rs['id']}"
+//    url=url+"&mulu="
+    url=url+"&sid="+Math.random()
+    xmlHttp.onreadystatechange=stateChanged 
+    xmlHttp.open("GET",url,true)
+    xmlHttp.send(null);
+}
+
+function stateChanged(){ 
+    if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete"){ 
+        document.getElementById("attNameValue").innerHTML=xmlHttp.responseText 
+    } 
+}
+
+function GetXmlHttpObject(){
+    var xmlHttp=null;
+    try{
+        // Firefox, Opera 8.0+, Safari
+        xmlHttp=new XMLHttpRequest();
+    }
+    catch (e){
+        //Internet Explorer
+        try{xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");}
+        catch (e){xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");}
+    }
+    return xmlHttp;
+}
+</script>
+<!--属性结束-->
+<include file="Public:foot" />

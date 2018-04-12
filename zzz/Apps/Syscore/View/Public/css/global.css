@@ -1,0 +1,41 @@
+/*全局*/
+.fl{float:left;}
+.fr{float:right;}
+#tab1 td{padding-top:10px;}
+#tabFile1 td{padding-top:10px;}
+.pdl7{padding-left:7px;}
+.pdr5{padding-right:5px;}
+.lh26{line-height:26px;}
+.lh34{line-height:34px;}
+select{cursor:pointer;}
+.hidden{display:none;}
+.mr5{margin-right:5px;}
+.margin-top-5{margin-top:5px;}
+
+.borderradius{border-radius:0;}
+.borderradius_left0{border-bottom-left-radius:0;border-top-left-radius:0;}
+
+/*权限复选框*/
+.check_cursor{float:left; width:160px; height:35px; line-height:35px; cursor:pointer;}
+
+/*编辑页面*/
+.edit_nav_left{float:left; list-style:none; line-height:40px; padding:0 0 0 10px;}
+
+
+
+
+
+
+
+
+
+
+
+
+/*分页*/
+.pages a,.pages span{display:inline-block; padding:3px 10px; margin:0 2px; border:1px solid #eee; -webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px;}
+.pages a,.pages li{display:inline-block; list-style: none; text-decoration:none;}
+.pages li.rows{margin:0 0 0 7px; font-size:12px;}
+.pages a.first,.pages a.prev,.pages a.next,.pages a.end{margin:0;}
+.pages a:hover{border-color:#4a8bc2; background:#4a8bc2; color:#fff;}
+.pages span.current{background:#2fade7; color:#FFF; font-weight:700; border-color:#2fade7;}

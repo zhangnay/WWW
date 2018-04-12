@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$seotitle}</title>
+<meta name="keywords" content="{$rs['keyword']}" />
+<meta name="description" content="{$rs['description']}" />
+<link type="text/css" href="__HOME_CSS__/global.css" rel="stylesheet" />
+</head>
+<body>
+<include file="Public:head" />
+<div class="page_banner" style="background:url({$adRs['imgurl']}) center no-repeat;"></div>
+<div class="page_floor">
+    <div class="page_kong"></div>
+	<div class="c1200">
+	    <div class="page_left">
+		    <div class="page_left_nav"><img src="__HOME_IMG__/ico_1.png" width="25" align="absmiddle" class="mr10" />{$Think.lang.product}</div>
+<!--左侧菜单开始-->		
+<div class="leftnav">
+    <ul>
+        <php>getSortList(1);</php>
+    </ul>
+</div>
+<script language="JavaScript">
+function c(srcelement){
+    var targetid, srcelement, targetelement;
+    targetid = srcelement.id + "d";
+    targetelement = document.getElementById(targetid);
+    if(targetelement.style.display == "none"){
+        srcelement.className = "active";
+        targetelement.style.display = '';
+    }else{
+        srcelement.className = "";
+        targetelement.style.display = "none";
+    }
+}
+</script>
+<!--左侧菜单结束-->		
+			<div class="leftnav"><img src="__HOME_IMG__/contact_ico.jpg" border="0" alt="" class="contact_img" /></div>
+		</div>
+		<div class="page_right">
+		    <div class="page_right_nav">
+			    <div class="fl">{$Think.lang.v_position}{$Think.lang.v_home} &gt; {$Think.lang.product}{$sortnav}</div>
+				<div class="fr">
+				    <form name="formsearch" method="post" action="{:U(CONTROLLER_NAME.'/index')}"><input type="hidden" name="sortid" value="{:I('get.sortid')}"><input name="keyword" type="text" value="{$Think.lang.v_quickfind}……" onfocus="if (this.value == '{$Think.lang.v_quickfind}……') this.value = '';" onblur="if (this.value == '') this.value = '{$Think.lang.v_quickfind}……';" class="ipt"><input name="submitsearch" type="submit" value="" class="btn" /></form>
+				</div>
+			</div>
+			<div class="page_content">
+	            <!--相册开始-->
+                <link rel="stylesheet" type="text/css" href="__HOME_CSS__/jqzoom.css" />
+                <script type="text/javascript" src="__HOME_JS__/jquery.jqzoom.js"></script>
+                <script type="text/javascript" src="__HOME_JS__/jqzoom.js"></script>
+			        <div class="details bg">
+                        <div class="image">
+                            <div id="preview" class="spec-preview"><span class="jqzoom">
+                                <volist name="piclist" id="imgRs">
+                                    <eq name="i" value="1"><img alt="" jqimg="{$imgRs}" src="{$imgRs}"></eq>
+                                </volist>
+                            </span>
+                            </div>
+                            <!--缩图开始-->
+							<div class="spec-scroll">
+                                <a class="prev">&lt;</a>
+                                <a class="next">&gt;</a>
+                                <div class="items" id="items">
+                                    <ul>
+									    <volist name="piclist" id="imgurl">
+                                            <li><img bimg="{$imgurl}" src="{$imgurl}"></li>
+                                        </volist>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--缩图结束-->
+                        </div>
+                        <div class="list">
+						    <div class="fl500h30">
+							    <h1 class="f18">{$rs['title']}</h1><br /><br />
+                                <span class="f18">{$Think.lang.v_price}：<span class="red fb">$ {$rs.price}</span></span><br /><br />
+                                <volist name="attribute" id="attRs">
+                                    <span class="f16">{$attRs.attname}：{:str_replace('|', '', $attRs['attvalue'])}</span><br />
+                                </volist><br />
+								{$Think.lang.v_hits}：{$rs['hits']}
+							</div>
+                            <div class="fl500h30">
+                                <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24"><span class="jiathis_txt" style="font-size:14px;">Share to：</span>
+<a class="jiathis_button_qzone"></a>
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_tqq"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_renren"></a>
+<a class="jiathis_button_cqq"></a>
+<a class="jiathis_button_xiaoyou"></a>
+<a class="jiathis_button_tifeng"></a>
+<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	summary:"",
+	shortUrl:false,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+                            </div>
+                            <script>
+                                $("#items").find("li").hover(function() {
+                                    var img_small = $(this).children("img").attr("src");
+                                    var img_big = $(this).children("img").attr("bimg");
+
+                                    $("#preview .jqzoom img").attr("src", img_small);
+                                    $("#preview .jqzoom img").attr("jqimg", img_big);
+                                    $(this).addClass("current").siblings("li").removeClass("current");
+                                })
+                            </script>
+                        </div>
+                    </div>
+				<!--相册结束-->
+			</div>
+			<!--TAB开始-->
+			<div class="view_content" id="tab">
+                <ul class="tab_menu">
+                    <li class="current">{$Think.lang.v_content1}</li>
+                    <li>{$Think.lang.v_content2}</li>
+                    <li>{$Think.lang.v_content3}</li>
+                    <li id="comment f14">{$Think.lang.v_comment}</li>
+                </ul>
+                <div id="tab_box" class="view_content_txt">
+                    <div>{$rs['content1']|htmlspecialchars_decode}</div>
+                    <div class="hide">{$rs['content2']|htmlspecialchars_decode}</div>
+                    <div class="hide">{$rs['content3']|htmlspecialchars_decode}</div>
+                </div>
+			</div>
+            <script src="__HOME_JS__/jquery.tabs.js"></script>
+            <script type="text/javascript">
+                $(function() {
+                    $('#tab').Tabs({
+                        event: 'click'
+                    });
+                });
+            </script>
+			<!--TAB结束-->
+			<!--评论开始-->
+			<div class="comment" name="comment"><a name="comment"></a> 
+			    <div class="comment_nav">{$Think.lang.v_comment}</div>
+				<div class="comment_content">
+				    <div class="comment_percent">
+					    <span class="red"><span class="f48">{$starp3}</span><span class="f18">%</span></span><br /><span class="gray">{$Think.lang.v_praise_degree}</span>
+					</div>
+					<div class="comment_star">
+					    <img src="__PUBLIC__/img/star3.gif" width="36" height="12" class="mr5" />{$Think.lang.v_good}<span class="gray">（{$starp3}%）</span><br /><img src="__PUBLIC__/img/star2.gif" width="36" height="12" class="mr5" />{$Think.lang.v_medium}<span class="gray">（{$starp2}%）</span><br /><img src="__PUBLIC__/img/star1.gif" width="36" height="12" class="mr5" />{$Think.lang.v_bad}<span class="gray">（{$starp1}%）</span>
+					</div>
+					<div class="comment_star_width">
+					    <div class="comment_star_percent">
+						    <span class="comment_star_num" style="width:<php> echo $starp3*440/100;</php>px;"></span>
+						</div>
+					    <div class="comment_star_percent">
+						    <span class="comment_star_num" style="width:<php> echo $starp2*440/100;</php>px;"></span>
+						</div>
+					    <div class="comment_star_percent">
+						    <span class="comment_star_num" style="width:<php> echo $starp1*440/100;</php>px;"></span>
+						</div>
+					</div>
+					<div class="comment_number">
+					    {$star3}<br />{$star2}<br />{$star1}
+					</div>
+				</div>
+				<div class="comment_content">
+				    <form name="comment_form" id="comment_form" onSubmit="return check();" action="{:U()}" method="post">
+					    <input type="hidden" name="parentid" value="<eq name="Think.get.parentid" value="">0<else/>{:I('get.parentid')}</eq>" />
+						<input type="hidden" name="moduleid" value="1" />
+						<input type="hidden" name="infoid" value="{:I('get.id')}" />
+				        <div class="page_content">
+					        <input name="star" type="radio" class="mr5" value="3" checked="checked" />
+					        {$Think.lang.v_good}<img src="__PUBLIC__/img/star3.gif" width="36" height="12" class="ml5 mr20" /><input name="star" type="radio" value="2" class="mr5" />{$Think.lang.v_medium}<img src="__PUBLIC__/img/star2.gif" width="36" height="12" class="ml5 mr20" /><input name="star" type="radio" value="1" class="mr5" />{$Think.lang.v_bad}<img src="__PUBLIC__/img/star1.gif" width="36" height="12" class="ml5" />
+					    </div>
+					    <div class="page_content">
+					        <textarea name="content" id="content" rows="6" class="cp100" onKeyDown="CountStrByte(this.form.content,this.form.total,this.form.used,this.form.remain);" onKeyUp="CountStrByte(this.form.content,this.form.total,this.form.used,this.form.remain);"></textarea>
+					    </div>
+					    <div class="page_content">
+					        <span class="red">*</span>{$Think.lang.v_verify}：<input  name="verify" type="text" size="12" class="ipt_content mr5" placeholder="{$Think.lang.v_write_verify}"><a href="javascript:void(0)"><img class="verify reloadverify" src="{:U(CONTROLLER_NAME.'/verify')}" border="0" width="106" height="32" alt="{$Think.lang.v_refresh}" align="absmiddle" /></a>
+					    </div>
+					    <div class="page_content">
+                            <div class="fl">
+					            <input type="submit" name="comment_submit" value="{$Think.lang.v_write_comment}" class="button btn_white" /><span class="mr20"></span><input type="hidden" name="anonymous" value="1" /><input type="hidden" name="status" value="0" /><span class="gray"> ({$Think.lang.v_limit_content})     {$Think.lang.v_current_input} <input name="used" type="text" disabled class="comment_words" id="used" value="0">{$Think.lang.v_words}</span><input type="hidden" id="total" value="500" /><input type="hidden" id="remain" value="500" />
+                            </div>
+                            <div class="fr"><a href="{:U('Comment/index?moduleid=1&infoid='.I('get.id'))}">&gt;&gt;{$Think.lang.v_more} {$Think.lang.v_comment}</a></div>
+					    </div>
+					</form>
+				</div>
+				<div class="coment_list">
+<table border="0" cellpadding="0" cellspacing="0" style="margin:0 auto; width:846px; border:1px solid #ddd; clear:both;">
+    <tr><td>
+    <volist name="list" id="rs">
+        <php>
+            $width_a=544;
+            $width_b=474;
+            $width_c=280;
+            if($rs['level']<5){
+                $width_a=824-$rs['level']*70;
+                $width_b=754-$rs['level']*70;
+                $width_c=$rs['level']*70;
+            }
+        </php>
+        <div style="float:left; width:<php>echo $width_a;</php>px; margin-left:<php>echo $width_c;</php>px; padding:10px; border-left:1px dashed #ddd; border-right:1px dashed #ddd; border-bottom:1px dashed #ddd;">
+            <div style="float:left; width:70px; height:55px;">
+                <img src="/public/img/avatar.jpg" style="border-radius: 5px; -moz-border-radius: 5px; border:1px solid #ddd;" width="53" height="53">
+            </div>
+            <div style="float:left; width:<php>echo $width_b;</php>px;">
+                {$Think.lang.f_anonymous} {$rs['addtime']|date='Y-m-d H:i:s',###}<br />
+                {$rs['content']}<br />
+                <a class="zan" rel="{$rs['id']}" rev="agree"><span class="gray" style="cursor:pointer;">{$Think.lang.c_agree}（{$rs['agree']}） </span></a> <a class="zan" rel="{$rs['id']}" rev="against"><span class="gray" style="cursor:pointer;">{$Think.lang.c_against}（{$rs['against']}） </span></a> <a href="{:U('Product/view?id='.I('get.id').'&parentid='.$rs['id'].'#comment')}"><span class="gray">{$Think.lang.f_reply}</span></a>
+            </div>
+        </div>
+    </volist>
+    </td></tr>
+</table>
+				</div>
+			</div>
+			<!--评论结束-->
+		</div>
+	</div>
+</div>
+<div class="cp100 h10 clear"></div>
+<script type="text/javascript">
+<neq name="Think.get.parentid" value="">
+document.getElementById("content").focus();
+</neq>
+//评论字符限制
+function check(){
+  var content=document.comment_form.content.value;
+  if(document.getElementById("content").value.length<5){
+      alert("{$Think.lang.v_must_be_words}");
+      document.comment_form.content.focus();
+	  return false;
+  }
+}
+</script>
+<script type="text/javascript">
+//输入字数提示
+var LastCount =0;
+function CountStrByte(Message,Total,Used,Remain){ 
+ var ByteCount = 0;
+ var StrValue  = Message.value;
+ var StrLength = Message.value.length;
+ var MaxValue  = Total.value;
+ if(LastCount != StrLength) { 
+	for (i=0;i<StrLength;i++){
+		ByteCount  = (StrValue.charCodeAt(i)<=256) ? ByteCount + 1 : ByteCount + 2;
+      if (ByteCount>MaxValue) {
+      	Message.value = StrValue.substring(0,i);
+			alert("{$Think.lang.v_limit_note} " +MaxValue+ " {$Think.lang.v_byte}！\n{$Think.lang.v_tips_byte}。");
+         ByteCount = MaxValue;
+         break;
+      }
+	}
+   Used.value = ByteCount;
+   Remain.value = MaxValue - ByteCount;
+   LastCount = StrLength;
+ }
+}
+</script>
+<script type="text/javascript">
+//刷新验证码
+	$(function(){
+		var verify = $(".verify").attr("src");
+		$(".reloadverify").click(function(){
+			if( verify.indexOf('?')>0){
+				$(".verify").attr("src", verify+'&random='+Math.random());
+			}else{
+				$(".verify").attr("src", verify.replace(/\?.*$/,'')+'?'+Math.random());
+			}
+		});
+	});
+	
+</script>
+<script type="text/javascript">
+$(function(){
+	$(".zan").click(function(){
+		var love = $(this);
+		var id = love.attr("rel");
+		var rev = love.attr("rev");
+		love.fadeOut(300);
+		$.ajax({
+			type:"POST",
+			url:"{:U(CONTROLLER_NAME.'/zan')}",
+			data:"rev="+rev+"&id="+id,
+			cache:false,
+			success:function(data){
+			    alert(data);
+				love.html("<span class=\"gray\" style=\"cursor:pointer;\">"+data+"</span>");
+				love.fadeIn(300);
+			}
+		});
+		return false;
+	});
+});
+</script>
+<include file="Public:foot" />

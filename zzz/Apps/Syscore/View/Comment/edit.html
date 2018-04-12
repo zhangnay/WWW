@@ -1,0 +1,163 @@
+<include file="Public:head" />
+        <!--容器 开始-->
+        <div class="page-container">
+            <!--侧边栏 开始-->
+            <div class="page-sidebar-wrapper">
+                <!--侧边栏 开始-->
+                <div class="page-sidebar navbar-collapse collapse">
+                    <include file="Public:globalleft" />
+                    <include file="Public:responseleft" />
+                </div>
+            <!--侧边栏 结束-->
+            </div>
+            <!--侧边栏 结束-->
+            <!--内容 开始-->
+            <div class="page-content-wrapper">
+                <!--内容主体 开始-->
+                <div class="page-content">
+                    <!--页面头部 开始-->
+                    <!--页面导航 开始-->
+                    <div class="page-bar">
+                        <ul class="page-breadcrumb">
+                            <li><span>{$Think.lang.v_global}</span><i class="fa fa-angle-right"></i></li>
+                            <li><span>{$Think.lang.v_global}</span><i class="fa fa-angle-right"></i></li>
+                            <li><span>{$Think.lang.v_comment} {$Think.lang.v_manage}</span><i class="fa fa-angle-right"></i></li>
+                            <li><span><eq name="rs.id" value="">{$Think.lang.v_add}<else />{$Think.lang.v_edit}</eq> {$Think.lang.v_comment}</span></li>
+                        </ul>
+                    </div>
+                    <!--页面导航 结束-->
+                    <!--页面头部 结束-->
+                    <!--右侧主体 开始-->
+                    <div class="row margin-top-20">
+                        <div class="col-md-12">
+                            <form method="post" action="" class="form-horizontal" id="validationForm">
+                                <input type="hidden" name="id" value="<neq name="Think.get.reply" value="yes">{$rs.id}</neq>">
+                                <input type="hidden" name="lan" value="{:I('get.lan')}">
+                                <input type="hidden" name="anonymous" value="<neq name="$rs.anonymous" value="">0<else />{$rs.anonymous}</neq>" />
+				                <eq name="Think.get.reply" value="yes">
+				                    <input type="hidden" name="moduleid" value="{$rs.moduleid}">
+				                    <input type="hidden" name="infoid" value="{$rs.moduleinfoid}">
+					                <input type="hidden" name="parentid" value="{$rs.id}">
+				                </eq>
+                                <div class="portlet bg-green bg-font-white">
+                                    <div class="portlet-body">
+                                        <div class="tabbable-bordered">
+                                            <div class="edit_nav_left">
+                                                <i class="fa fa-edit font-white"></i> <span class="font-white"><eq name="rs.id" value="">{$Think.lang.v_add}<else />{$Think.lang.v_edit}</eq> {$Think.lang.v_comment}</span>
+                                            </div>
+                                            <ul class="nav nav-tabs tabs-reversed"></ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="tab_general">
+                                                    <div class="form-body">
+                                                        <div class="alert alert-danger display-hide"><button class="close" data-close="alert"></button>{$Think.lang.v_error_tips}</div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">{$Think.lang.v_original}</label>
+                                                            <div class="col-md-4">
+                                                                <div class="form-control-static"><a href="{:U($module.'/view?id='.$rs['moduleinfoid'])}" target="_blank">{$rs['title']}</a></div>
+                                                            </div>
+                                                        </div>
+                                                        <eq name="Think.get.reply" value="yes">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3">{$Think.lang.v_comment}</label>
+                                                                <div class="col-md-4">
+                                                                    <div class="form-control-static">{$rs['content']|htmlspecialchars_decode}</div>
+                                                                 </div>
+                                                            </div>
+                                                        </eq>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">{$Think.lang.v_date} / IP</label>
+                                                            <div class="col-md-4">
+                                                                <div class="form-control-static">{$rs['addtime']|date='Y-m-d H:i:s',###} IP：{$rs['ip']}</div>
+                                                            </div>
+                                                        </div>
+                                                        <neq name="Think.get.reply" value="yes">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3">{$Think.lang.v_score}</label>
+                                                                <div class="radio-list">
+                                                                    <label class="radio-inline">
+                                                                        <input name="star" type="radio" value="3" <eq name="rs['star']" value="3">checked="checked"</eq> />{$Think.lang.v_good}<img src="__PUBLIC__/img/star3.gif" width="36" height="12" />
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input name="star" type="radio" value="2" <eq name="rs['star']" value="2">checked="checked"</eq> />{$Think.lang.v_medium}<img src="__PUBLIC__/img/star2.gif" width="36" height="12" />
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input name="star" type="radio" value="1" <eq name="rs['star']" value="1">checked="checked"</eq> /> {$Think.lang.v_bad}<img src="__PUBLIC__/img/star1.gif" width="36" height="12" />
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        <else />
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3"><eq name="Think.get.reply" value="yes">{$Think.lang.v_reply}</eq> {$Think.lang.v_score}</label>
+                                                                <div class="radio-list">
+                                                                    <label class="radio-inline">
+                                                                        <input name="star" type="radio" value="3" checked="checked" />{$Think.lang.v_good}<img src="__PUBLIC__/img/star3.gif" width="36" height="12" />
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input name="star" type="radio" value="2" />{$Think.lang.v_medium}<img src="__PUBLIC__/img/star2.gif" width="36" height="12" />
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input name="star" type="radio" value="1" /> {$Think.lang.v_bad}<img src="__PUBLIC__/img/star1.gif" width="36" height="12" />
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </neq>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3"><neq name="Think.get.reply" value="yes">{$Think.lang.v_comment}<else />{$Think.lang.v_reply}</neq> {$Think.lang.v_content_a}</label>
+                                                            <div class="col-md-4">
+                                                                <textarea name="content" class="form-control" rows="5"><neq name="Think.get.reply" value="yes">{$rs['content']}</neq></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <neq name="Think.get.reply" value="yes">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3">{$Think.lang.v_status}</label>
+                                                                <div class="radio-list">
+                                                                    <label class="radio-inline">
+                                                                        <input name="status" type="radio" value="1" <eq name="rs['status']" value="1">checked="checked"</eq> />{$Think.lang.v_audit}
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input name="status" type="radio" value="0" <eq name="rs['status']" value="0">checked="checked"</eq> />{$Think.lang.v_audit_pending}
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        <else />
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3"><eq name="Think.get.reply" value="yes">{$Think.lang.v_reply}</eq> {$Think.lang.v_status}</label>
+                                                                <div class="radio-list">
+                                                                    <label class="radio-inline">
+                                                                        <input name="status" type="radio" value="1" checked="checked" />{$Think.lang.v_audit}
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input name="status" type="radio" value="0" />{$Think.lang.v_audit_pending}
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </neq>
+                                                    </div>
+                                                </div>
+                                                <div class="form-actions">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <button type="submit" class="btn green"><i class="fa fa-check"></i> {$Think.lang.v_save}</button>
+                                                            <button type="button" class="btn default" onclick="javascript:history.back(-1);">{$Think.lang.v_goback}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--右侧主体 结束-->
+                </div>
+                <!--内容主体 结束-->
+            </div>
+            <!--内容 结束-->
+            <include file="Public:rightquickbar" />
+        </div>
+        <!--容器 结束-->
+<include file="Public:foot" />
+<script src="__PUBLIC__/bootstrap/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+</body>
+</html>

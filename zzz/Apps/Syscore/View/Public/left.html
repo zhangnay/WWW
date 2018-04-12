@@ -1,0 +1,103 @@
+                    <!--侧边栏菜单 开始-->
+                    <ul class="page-sidebar-menu  page-header-fixed hidden-sm hidden-xs" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                        <volist name="modulelist" id="modulers">
+                        <php>$isdisplay_array=explode(',',$modulers['isdisplay']);</php>
+                        <li class="nav-item <if condition="$modulers['id'] eq I('get.moduleid')">active open</if>">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+				                <switch name="modulers.id" >
+                                    <case value="1"><i class="icon-grid"></i></case>
+                                    <case value="2"><i class="icon-book-open"></i></case>
+                                    <case value="3"><i class="icon-paper-clip"></i></case>
+                                    <case value="4"><i class="icon-doc"></i></case>
+                                    <case value="5"><i class="icon-badge"></i></case>
+                                    <case value="6"><i class="icon-notebook"></i></case>
+                                    <default /><i class="icon-grid"></i>
+                                </switch>
+                                <span class="title">
+				                    <switch name="modulers.id" >
+                                        <case value="1">{$Think.lang.v_product}</case>
+                                        <case value="2">{$Think.lang.v_news}</case>
+                                        <case value="3">{$Think.lang.v_down}</case>
+                                        <case value="4">{$Think.lang.v_page_module}</case>
+                                        <case value="5">{$Think.lang.v_project}</case>
+                                        <case value="6">{$Think.lang.v_guestbook}</case>
+                                        <default />{$modulers['modulename']}
+                                    </switch> {$Think.lang.v_manage}
+                                </span>
+                                <span class="selected"></span>
+                                <span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <if condition="(in_array('addinfo',$isdisplay_array))"><!--是否显示添加信息-->
+                                <li class="nav-item<if condition="($modulers['id'] eq I('get.moduleid')) and (CONTROLLER_NAME eq $modulers['module']) and ACTION_NAME eq 'edit'"> active open</if>">
+                                    <a href="{:U($modulers['module'].'/edit?moduleid='.$modulers['id'].'&lan='.I('get.lan'))}" class="nav-link ">
+                                        <i class="fa fa-edit"></i>
+                                        {$Think.lang.v_add}
+				                        <switch name="modulers.id" >
+                                            <case value="1">{$Think.lang.v_product}</case>
+                                            <case value="2">{$Think.lang.v_news}</case>
+                                            <case value="3">{$Think.lang.v_down}</case>
+                                            <case value="4">{$Think.lang.v_page_module}</case>
+                                            <case value="5">{$Think.lang.v_project}</case>
+                                            <case value="6">{$Think.lang.v_guestbook}</case>
+                                            <default />{$modulers['modulename']}
+                                        </switch>
+                                        <if condition="($modulers['id'] eq I('get.moduleid')) and (CONTROLLER_NAME eq $modulers['module']) and ACTION_NAME eq 'edit'"><span class="fa fa-angle-right pull-right"></span></if>
+                                    </a>
+                                </li>
+                                </if>
+                                <!--信息管理-->
+                                <li class="nav-item<if condition="($modulers['id'] eq I('get.moduleid')) and (CONTROLLER_NAME eq $modulers['module']) and ACTION_NAME eq 'index'"> active open</if>">
+                                    <a href="{:U($modulers['module'].'/index?moduleid='.$modulers['id'].'&lan='.I('get.lan'))}" class="nav-link ">
+                                        <i class="fa fa-th"></i>
+				                        <switch name="modulers.id" >
+                                            <case value="1">{$Think.lang.v_product}</case>
+                                            <case value="2">{$Think.lang.v_news}</case>
+                                            <case value="3">{$Think.lang.v_down}</case>
+                                            <case value="4">{$Think.lang.v_page_module}</case>
+                                            <case value="5">{$Think.lang.v_project}</case>
+                                            <case value="6">{$Think.lang.v_guestbook}</case>
+                                            <default />{$modulers['modulename']}
+                                        </switch> {$Think.lang.v_manage}
+                                        <if condition="($modulers['id'] eq I('get.moduleid')) and (CONTROLLER_NAME eq $modulers['module']) and ACTION_NAME eq 'index'"><span class="fa fa-angle-right pull-right"></span></if>
+                                    </a>
+                                </li>
+                                <if condition="(in_array('sort',$isdisplay_array))"><!--是否显示分类-->
+                                <li class="nav-item<if condition="($modulers['id'] eq I('get.moduleid')) and (CONTROLLER_NAME eq 'Sort')"> active open</if>">
+                                    <a href="{:U('Sort/index?moduleid='.$modulers['id'].'&lan='.I('get.lan'))}" class="nav-link ">
+                                        <i class="fa fa-sitemap"></i>
+				                        <switch name="modulers.id" >
+                                            <case value="1">{$Think.lang.v_product}</case>
+                                            <case value="2">{$Think.lang.v_news}</case>
+                                            <case value="3">{$Think.lang.v_down}</case>
+                                            <case value="4">{$Think.lang.v_page_module}</case>
+                                            <case value="5">{$Think.lang.v_project}</case>
+                                            <case value="6">{$Think.lang.v_guestbook}</case>
+                                            <default />{$modulers['modulename']}
+                                        </switch> {$Think.lang.v_sort}
+                                        <if condition="($modulers['id'] eq I('get.moduleid')) and (CONTROLLER_NAME eq 'Sort')"><span class="fa fa-angle-right pull-right"></span></if>
+                                    </a>
+                                </li>
+                                </if>
+                                <if condition="(in_array('attribute',$isdisplay_array))"><!--是否显示属性-->
+                                <li class="nav-item<if condition="($modulers['id'] eq I('get.moduleid')) and (CONTROLLER_NAME eq 'Attribute')"> active open</if>">
+                                    <a href="{:U('Attribute/index?moduleid='.$modulers['id'].'&lan='.I('get.lan'))}" class="nav-link ">
+                                        <i class="fa fa-tag"></i>
+				                        <switch name="modulers.id" >
+                                            <case value="1">{$Think.lang.v_product}</case>
+                                            <case value="2">{$Think.lang.v_news}</case>
+                                            <case value="3">{$Think.lang.v_down}</case>
+                                            <case value="4">{$Think.lang.v_page_module}</case>
+                                            <case value="5">{$Think.lang.v_project}</case>
+                                            <case value="6">{$Think.lang.v_guestbook}</case>
+                                            <default />{$modulers['modulename']}
+                                        </switch> {$Think.lang.v_attribute}
+                                        <if condition="($modulers['id'] eq I('get.moduleid')) and (CONTROLLER_NAME eq 'Attribute')"><span class="fa fa-angle-right pull-right"></span></if>
+                                    </a>
+                                </li>
+                                </if>
+                            </ul>
+                        </li>
+                        </volist>
+                    </ul>
+                    <!--侧边栏菜单 结束-->

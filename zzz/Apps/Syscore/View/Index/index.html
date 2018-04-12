@@ -1,0 +1,123 @@
+<include file="Public:head" />
+        <!--容器 开始-->
+        <div class="page-container">
+            <!--侧边栏 开始-->
+            <div class="page-sidebar-wrapper">
+                <!--侧边栏 开始-->
+                <div class="page-sidebar navbar-collapse collapse">
+                    <include file="Public:left" />
+                    <include file="Public:responseleft" />
+                </div>
+            <!--侧边栏 结束-->
+            </div>
+            <!--侧边栏 结束-->
+            <!--内容 开始-->
+            <div class="page-content-wrapper">
+                <!--内容主体 开始-->
+                <div class="page-content">
+                    <!--页面头部 开始-->
+                    <!--页面导航 开始-->
+                    <div class="page-bar">
+                        <ul class="page-breadcrumb">
+                            <li><span>{$Think.lang.v_home}</span><i class="fa fa-angle-right"></i></li>
+                            <li><span>{$Think.lang.v_quick_edit}</span></li>
+                        </ul>
+                    </div>
+                    <!--页面导航 结束-->
+                    <!--页面头部 结束-->
+                    <!--右侧主体 开始-->
+                    <div class="col-md-12 margin-top-10 margin-bottom-10"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!--模块 开始-->
+                            <volist name="modulelist" id="modulers">
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <div class="color-demo tooltips">
+                                    <a href="{:U($modulers['module'].'/edit?moduleid='.$modulers['id'].'&lan='.I('get.lan'))}">
+                                    <switch name="modulers.id" >
+                                        <case value="1"><div class="color-view bg-green bg-font-green uppercase"><i class="icon-grid"></i> {$Think.lang.v_add} {$Think.lang.v_product}</div></a><div class="color-info bg-white c-font-14"><a href="{:U($modulers['module'].'/index?moduleid='.$modulers['id'].'&lan='.I('get.lan'))}"><i class="icon-grid"></i> {$Think.lang.v_product} {$Think.lang.v_manage}</a></div></case>
+                                        <case value="2"><div class="color-view bg-blue bg-font-blue uppercase"><i class="icon-book-open"></i> {$Think.lang.v_add} {$Think.lang.v_news}</div></a><div class="color-info bg-white c-font-14"><a href="{:U($modulers['module'].'/index?moduleid='.$modulers['id'].'&lan='.I('get.lan'))}"><i class="icon-book-open"></i> {$Think.lang.v_news} {$Think.lang.v_manage}</a></div></case>
+                                        <case value="3"><div class="color-view bg-purple-seance bg-font-purple-seance uppercase"><i class="icon-paper-clip"></i> {$Think.lang.v_add} {$Think.lang.v_down}</div></a><div class="color-info bg-white c-font-14"><a href="{:U($modulers['module'].'/index?moduleid='.$modulers['id'].'&lan='.I('get.lan'))}"><i class="icon-paper-clip"></i> {$Think.lang.v_down} {$Think.lang.v_manage}</a></div></case>
+                                        <case value="4"><div class="color-view bg-green-jungle bg-font-green-jungle uppercase"><i class="icon-doc"></i> {$Think.lang.v_add} {$Think.lang.v_page_module}</div></a><div class="color-info bg-white c-font-14"><a href="{:U($modulers['module'].'/index?moduleid='.$modulers['id'].'&lan='.I('get.lan'))}"><i class="icon-doc"></i> {$Think.lang.v_page_module} {$Think.lang.v_manage}</a></div></case>
+                                        <case value="5"><div class="color-view bg-yellow-gold bg-font-yellow-gold uppercase"><i class="icon-badge"></i> {$Think.lang.v_add} {$Think.lang.v_project}</div></a><div class="color-info bg-white c-font-14"><a href="{:U($modulers['module'].'/index?moduleid='.$modulers['id'].'&lan='.I('get.lan'))}"><i class="icon-badge"></i> {$Think.lang.v_project} {$Think.lang.v_manage}</a></div></case>
+                                        <default /><div class="color-view bg-yellow bg-font-yellow uppercase"><i class="icon-notebook"></i> {$Think.lang.v_add} {$modulers['modulename']}</div></a><div class="color-info bg-white c-font-14"><a href="{:U($modulers['module'].'/index?moduleid='.$modulers['id'].'&lan='.I('get.lan'))}"><i class="icon-notebook"></i> {$modulers['modulename']} {$Think.lang.v_manage}</a></div>
+                                    </switch>
+                                </div>
+                            </div>
+                            </volist>
+                            <!--模块 结束-->
+                            <!--全局 开始-->
+                            <!--留言-->
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <div class="color-demo tooltips"><a href="{:U('Guestbook/index?lan='.I('get.lan'))}"><div class="color-view bg-yellow bg-font-yellow uppercase"><i class="fa fa-list-alt"></i> {$Think.lang.v_guestbook} {$Think.lang.v_manage}</div></a><div class="color-info bg-white c-font-14"><i class="fa fa-list-alt"></i></div></div>
+                            </div>
+                            <!--字段-->
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <div class="color-demo tooltips"><a href="{:U('Field/index?lan='.I('get.lan'))}"><div class="color-view bg-red-flamingo bg-font-red-flamingo uppercase"><i class="fa fa-list-alt"></i> {$Think.lang.v_field} {$Think.lang.v_manage}</div></a><div class="color-info bg-white c-font-14"><i class="fa fa-list-alt"></i></div></div>
+                            </div>
+                            <!--客服-->
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <div class="color-demo tooltips"><a href="{:U('Chat/index?lan='.I('get.lan'))}"><div class="color-view bg-red-flamingo bg-font-red-flamingo uppercase"><i class="fa fa-comments"></i> {$Think.lang.v_chat}</div></a><div class="color-info bg-white c-font-14"><i class="fa fa-comments"></i></div></div>
+                            </div>
+                            <!--用户-->
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <div class="color-demo tooltips"><a href="{:U('User/index?lan='.I('get.lan'))}"><div class="color-view bg-red-flamingo bg-font-red-flamingo uppercase"><i class="fa fa-user"></i> {$Think.lang.v_user} {$Think.lang.v_manage}</div></a><div class="color-info bg-white c-font-14"><i class="fa fa-user"></i></div></div>
+                            </div>
+                            <!--地区-->
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <div class="color-demo tooltips"><a href="{:U('Area/index?lan='.I('get.lan'))}"><div class="color-view bg-red-flamingo bg-font-red-flamingo uppercase"><i class="fa fa-map-marker"></i> {$Think.lang.v_area} {$Think.lang.v_manage}</div></a><div class="color-info bg-white c-font-14"><i class="fa fa-map-marker"></i></div></div>
+                            </div>
+                            <!--用户组-->
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <div class="color-demo tooltips"><a href="{:U('AuthGroup/index?lan='.I('get.lan'))}"><div class="color-view bg-red-flamingo bg-font-red-flamingo uppercase"><i class="fa fa-users"></i> {$Think.lang.v_usergroup} {$Think.lang.v_manage}</div></a><div class="color-info bg-white c-font-14"><i class="fa fa-users"></i></div></div>
+                            </div>
+                            <!--权限-->
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <div class="color-demo tooltips"><a href="{:U('AuthRule/index?lan='.I('get.lan'))}"><div class="color-view bg-red-flamingo bg-font-red-flamingo uppercase"><i class="fa fa-briefcase"></i> {$Think.lang.v_auth} {$Think.lang.v_manage}</div></a><div class="color-info bg-white c-font-14"><i class="fa fa-briefcase"></i></div></div>
+                            </div>
+                            <!--语言-->
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <div class="color-demo tooltips"><a href="{:U('Language/index?lan='.I('get.lan'))}"><div class="color-view bg-red-flamingo bg-font-red-flamingo uppercase"><i class="fa fa-language"></i> {$Think.lang.v_language} {$Think.lang.v_manage}</div></a><div class="color-info bg-white c-font-14"><i class="fa fa-language"></i></div></div>
+                            </div>
+                            <!--模块-->
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <div class="color-demo tooltips"><a href="{:U('Module/index?lan='.I('get.lan'))}"><div class="color-view bg-red-flamingo bg-font-red-flamingo uppercase"><i class="fa fa-cubes"></i> {$Think.lang.v_module} {$Think.lang.v_manage}</div></a><div class="color-info bg-white c-font-14"><i class="fa fa-cubes"></i></div></div>
+                            </div>
+                            <!--参数-->
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <div class="color-demo tooltips"><a href="{:U('Setconfig/index?lan='.I('get.lan'))}"><div class="color-view bg-red-flamingo bg-font-red-flamingo uppercase"><i class="fa fa-cogs"></i> {$Think.lang.v_config_setting}</div></a><div class="color-info bg-white c-font-14"><i class="fa fa-cogs"></i></div></div>
+                            </div>
+                            <!--导航-->
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <div class="color-demo tooltips"><a href="{:U('Navigation/index?lan='.I('get.lan'))}"><div class="color-view bg-red-flamingo bg-font-red-flamingo uppercase"><i class="fa fa-navicon"></i> {$Think.lang.v_navigation} {$Think.lang.v_manage}</div></a><div class="color-info bg-white c-font-14"><i class="fa fa-navicon"></i></div></div>
+                            </div>
+                            <!--广告-->
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <div class="color-demo tooltips"><a href="{:U('Ad/index?lan='.I('get.lan'))}"><div class="color-view bg-red-flamingo bg-font-red-flamingo uppercase"><i class="fa fa-bullhorn"></i> {$Think.lang.v_ad} {$Think.lang.v_manage}</div></a><div class="color-info bg-white c-font-14"><i class="fa fa-bullhorn"></i></div></div>
+                            </div>
+                            <!--评论-->
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <div class="color-demo tooltips"><a href="{:U('Comment/index?lan='.I('get.lan'))}"><div class="color-view bg-red-flamingo bg-font-red-flamingo uppercase"><i class="fa fa-commenting-o"></i> {$Think.lang.v_comment} {$Think.lang.v_manage}</div></a><div class="color-info bg-white c-font-14"><i class="fa fa-commenting-o"></i></div></div>
+                            </div>
+                            <!--数据库-->
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <div class="color-demo tooltips"><a href="{:U('Databackup/index?lan='.I('get.lan'))}"><div class="color-view bg-red-flamingo bg-font-red-flamingo uppercase"><i class="fa fa-database"></i> {$Think.lang.v_data} {$Think.lang.v_backup}</div></a><div class="color-info bg-white c-font-14"><i class="fa fa-database"></i></div></div>
+                            </div>
+                            <!--缓存-->
+                            <div class="col-md-3 col-sm-3 col-xs-6">
+                                <div class="color-demo tooltips"><a href="{:U('Index/delCache')}"><div class="color-view bg-red-flamingo bg-font-red-flamingo uppercase"><i class="fa fa-refresh"></i> {$Think.lang.v_clean_cache}</div></a><div class="color-info bg-white c-font-14"><i class="fa fa-refresh"></i></div></div>
+                            </div>
+                            <!--全局 结束-->
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <!--右侧主体 结束-->
+                </div>
+                <!--内容主体 结束-->
+            </div>
+            <!--内容 结束-->
+        </div>
+        <!--容器 结束-->
+<include file="Public:foot" />
+</body>
+</html>

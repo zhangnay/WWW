@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8" />
+<title>{$Think.lang.v_admin_system}</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<meta content="" name="author" />
+<!--全局强制样式 开始-->
+<link href="__PUBLIC__/bootstrap/googlefont/googlefont.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/bootstrap/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/bootstrap/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/bootstrap/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/bootstrap/global/plugins/uniform/css/uniform.default.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/bootstrap/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+<!--全局强制样式 结束-->
+<!--皮肤全局样式 开始-->
+<link href="__PUBLIC__/bootstrap/global/css/components-rounded.min.css" rel="stylesheet" id="style_components" type="text/css" />
+<link href="__PUBLIC__/bootstrap/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+<!--皮肤全局样式 结束-->
+<!--皮肤布局样式 开始-->
+<link href="__PUBLIC__/bootstrap/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/bootstrap/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
+<!--皮肤布局样式 结束-->
+<link href="__ADMIN_CSS__/global.css" rel="stylesheet" type="text/css" id="style_color" />
+</head>
+<body class="page-header-fixed page-footer-fixed page-sidebar-closed-hide-logo page-content-white">
+        <!--头部 开始-->
+        <div class="page-header navbar navbar-fixed-top">
+            <!--头部内部 开始-->
+            <div class="page-header-inner ">
+                <!--LOGO 开始-->
+                <div class="page-logo">
+                    <a href="{:U('Index/index?lan='.I('get.lan'))}"><eq name="Think.get.lan" value="ch"><img src="__PUBLIC__/bootstrap/layouts/layout/img/logo.png" class="logo-default" /><else /><img src="__PUBLIC__/bootstrap/layouts/layout/img/logoen.png" class="logo-default" /></eq></a>
+                    <div class="menu-toggler sidebar-toggler"> </div>
+                </div>
+                <!--LOGO 结束-->
+                <!--头部左侧横向菜单 开始-->
+                <div class="hor-menu   hidden-sm hidden-xs">
+                    <ul class="nav navbar-nav">
+                        <li class="classic-menu-dropdown 
+                            <switch name="Think.CONTROLLER_NAME">
+                                <case value="Guestbook|User|Area|AuthGroup|AuthRule|Language|Module|Setconfig|Navigation|Banner|Comment|Ad|Keywordlink|Chat|Field|Databackup"></case><default />active
+                            </switch>">
+                            <a href="{:U('Index/index?lan='.I('get.lan'))}"><i class="fa fa-home"></i> {$Think.lang.v_home}
+                                <switch name="Think.CONTROLLER_NAME">
+                                    <case value="Guestbook|User|Area|AuthGroup|AuthRule|Language|Module|Setconfig|Navigation|Banner|Comment|Ad|Keywordlink|Chat|Field|Databackup"></case><default /><span class="selected"></span>
+                                </switch>
+                            </a>
+                        </li>
+                        <li class="classic-menu-dropdown 
+                            <switch name="Think.CONTROLLER_NAME">
+                                <case value="Guestbook|User|Area|AuthGroup|AuthRule|Language|Module|Setconfig|Navigation|Banner|Comment|Ad|Keywordlink|Chat|Field|Databackup">active</case>
+                            </switch>">
+                            <a href="{:U('Field/index?lan='.I('get.lan'))}"><i class="fa fa-gear"></i> {$Think.lang.v_global}
+                                <switch name="Think.CONTROLLER_NAME">
+                                    <case value="Guestbook|User|Area|AuthGroup|AuthRule|Language|Module|Setconfig|Navigation|Banner|Comment|Ad|Keywordlink|Chat|Field|Databackup"><span class="selected"></span></case>
+                                </switch>
+                            </a>
+                        </li>
+                        <li class="classic-menu-dropdown"><a href="/" target="_blank"><i class="fa fa-desktop"></i> {$Think.lang.v_homepage}</a></li>
+                    </ul>
+                </div>
+                <!--头部左侧横向菜单 结束-->
+                <!--响应式菜单开关 开始-->
+                <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
+                <!--响应式菜单开关 结束-->
+                <!--头部右侧横向菜单 开始-->
+                <div class="top-menu">
+                    <ul class="nav navbar-nav pull-right">
+                        <!--语言导航条 开始-->
+                        <gt name="languageNum" value="1">
+                            <li class="dropdown dropdown-language">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                    <img alt="" src="{$nowLan.ico}">
+                                    <span class="langname">{$nowLan.adminname}</span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-default">
+                                    <volist name="headlan" id="headlan">
+                                        <neq name="Think.get.lan" value="$headlan.mulu">
+                                            <li><a href="{:U('Index/index?lan='.$headlan['mulu'])}"><img src="{$headlan['ico']}">{$headlan['adminname']}</a></li>
+                                        </neq>
+                                    </volist>
+                                </ul>
+                            </li>
+                         </gt>
+                        <!--语言导航条 结束-->
+                        <!--用户登录下拉 开始-->
+                        <li class="dropdown dropdown-user">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <img alt="" class="img-circle" src="{:I('session.avatar')}" />
+                                <span class="username username-hide-on-mobile"> {:I('session.realname')}</span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-default">
+                                <li>
+                                    <a href="{:U('User/edit?lan='.I('get.lan').'&id='.I('session.userid'))}">
+                                        <i class="icon-user"></i> {$Think.lang.v_me_edit}</a>
+                                </li>
+                                <li>
+                                    <a href="{:U('Login/logout')}" onClick='return confirm("{$Think.lang.v_confirm_quit}");'>
+                                        <i class="icon-power"></i> {$Think.lang.v_logout}</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--用户登录下拉 结束-->
+                    </ul>
+                </div>
+                <!--头部右侧横向菜单 结束-->
+            </div>
+            <!--头部内部 结束-->
+        </div>
+        <!--头部 结束-->
+        <!--头部和内容分割 开始-->
+        <div class="clearfix"> </div>
+        <!--头部和内容分割 结束-->
+        

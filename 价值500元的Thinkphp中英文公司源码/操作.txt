@@ -1,0 +1,45 @@
+tp操作系统3.2.3
+
+php wamp环境
+
+放www 目录下新建文件夹
+
+导入数据库在databak里面
+
+改配置apps common conf的config.php
+
+由于里面操作都是根目录，所以评论、添加什么的功能可能报错，那是因为路径错了，需要在路径前面加./或都文件名
+
+如果上传到线上虚似空间什么的就不用改，线上测试需要把根目录index.php的faulse改为true才能运行
+
+部分服务器不支持等原因，需要把根目录web.config内容换掉，换成以下代码便可运行
+
+直接复制粘贴以下代码
+
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <system.webServer>
+        
+        
+
+    <rewrite>
+    <rules>
+    <rule name="OrgPage" stopProcessing="true">
+   <match url="^(.*)$" />
+   <conditions logicalGrouping="MatchAll">
+   <add input="{HTTP_HOST}" pattern="^(.*)$" />
+   <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+   <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
+   </conditions>
+   <action type="Rewrite" url="index.php/{R:1}" />
+   </rule>
+   </rules>
+</rewrite>
+
+       
+
+    </system.webServer>
+
+</configuration>
+
+

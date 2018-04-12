@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<eq name="Think.get.p" value="">
+    <title>{$modulers['title']} {$Think.lang.v_comment}</title>
+<else />
+    <title>{$modulers['title']} {$Think.lang.v_comment}{$Think.config.separator}{$Think.lang.v_current}{$Think.get.p}{$Think.lang.v_page}</title>
+</eq>
+<meta name="keywords" content="{$modulers['keyword']}" />
+<meta name="description" content="{$modulers['description']}" />
+<link type="text/css" href="__HOME_CSS__/global.css" rel="stylesheet" />
+</head>
+<body>
+<a name="comment"></a> 
+<include file="Public:head" />
+<div class="cp100 h10 clear"></div>
+<div class="c1200" style="height:40px; line-height:40px; border-top:1px solid #ddd;">
+    {$Think.lang.v_position}{$Think.lang.v_home} &gt; {$Think.lang.v_comment} &gt; <a href="{:U($module.'/view?id='.$modulers['id'])}" target="_blank">{$modulers['title']}</a>
+</div>
+<div class="c1200" style="height:40px; line-height:40px; border-top:1px solid #ddd; padding:20px 0 0 0; text-align:center;">
+    <h1><a href="{:U($module.'/view?id='.$modulers['id'])}" target="_blank">{$modulers['title']}</a></h1> {$Think.lang.v_comment}
+</div>
+<div class="c1200">
+    <span class="gray">{$modulers['description']}</span>
+</div>
+<div class="c1200">
+				    <form name="comment_form" id="comment_form" onSubmit="return check();" action="{:U()}" method="post">
+					    <input type="hidden" name="parentid" value="<eq name="Think.get.parentid" value="">0<else/>{:I('get.parentid')}</eq>" />
+						<input type="hidden" name="moduleid" value="1" />
+						<input type="hidden" name="infoid" value="{:I('get.infoid')}" />
+				        <div class="page_content">
+					        <input name="star" type="radio" class="mr5" value="3" checked="checked" />
+					        {$Think.lang.v_good}<img src="__PUBLIC__/img/star3.gif" width="36" height="12" class="ml5 mr20" /><input name="star" type="radio" value="2" class="mr5" />{$Think.lang.v_medium}<img src="__PUBLIC__/img/star2.gif" width="36" height="12" class="ml5 mr20" /><input name="star" type="radio" value="1" class="mr5" />{$Think.lang.v_bad}<img src="__PUBLIC__/img/star1.gif" width="36" height="12" class="ml5" />
+					    </div>
+					    <div class="page_content">
+					        <textarea name="content" id="content" rows="6" class="cp100" onKeyDown="CountStrByte(this.form.content,this.form.total,this.form.used,this.form.remain);" onKeyUp="CountStrByte(this.form.content,this.form.total,this.form.used,this.form.remain);"></textarea>
+					    </div>
+					    <div class="page_content">
+					        <span class="red">*</span>{$Think.lang.v_verify}：<input  name="verify" type="text" size="8" class="ipt_content mr5" placeholder="{$Think.lang.v_write_verify}"><a href="javascript:void(0)"><img class="verify reloadverify" src="{:U(CONTROLLER_NAME.'/verify')}" border="0" width="106" height="28" alt="{$Think.lang.v_refresh}" align="absmiddle" /></a>
+					    </div>
+					    <div class="page_content">
+					        <input type="submit" name="comment_submit" value="{$Think.lang.v_write_comment}" class="button btn_white" /><span class="mr20"></span><input type="hidden" name="anonymous" value="1" /><input type="hidden" name="status" value="0" /><span class="gray"> ({$Think.lang.v_limit_content})     {$Think.lang.v_current_input} <input name="used" type="text" disabled class="comment_words" id="used" value="0">{$Think.lang.v_words}</span><input type="hidden" id="total" value="500" /><input type="hidden" id="remain" value="500" />
+                        </div>
+					</form>
+</div>
+<div class="cp100 h10 clear"></div>
+<table border="0" cellpadding="0" cellspacing="0" style="margin:0 auto; width:1198px; border:1px solid #ddd; clear:both;">
+    <tr><td>
+    <volist name="list" id="rs">
+        <php>
+            $width_a=546;
+            $width_b=476;
+            $width_c=630;
+            if($rs['level']<10){
+                $width_a=1176-$rs['level']*70;
+                $width_b=1106-$rs['level']*70;
+                $width_c=$rs['level']*70;
+            }
+        </php>
+        <div style="float:left; width:<php>echo $width_a;</php>px; margin-left:<php>echo $width_c;</php>px; padding:10px; border-left:1px dashed #ddd; border-right:1px dashed #ddd; border-bottom:1px dashed #ddd;">
+            <div style="float:left; width:70px; height:55px;">
+                <img src="/public/img/avatar.jpg" style="border-radius: 5px; -moz-border-radius: 5px; border:1px solid #ddd;" width="53" height="53">
+            </div>
+            <div style="float:left; width:<php>echo $width_b;</php>px;">
+                {$Think.lang.f_anonymous} {$rs['addtime']|date='Y-m-d H:i:s',###}<br />
+                {$rs['content']}<br />
+                <a class="zan" rel="{$rs['id']}" rev="agree"><span class="gray" style="cursor:pointer;">{$Think.lang.c_agree}（{$rs['agree']}） </span></a> <a class="zan" rel="{$rs['id']}" rev="against"><span class="gray" style="cursor:pointer;">{$Think.lang.c_against}（{$rs['against']}） </span></a> <a href="{:U('Comment/index?infoid='.I('get.infoid').'&parentid='.$rs['id'].'#comment')}"><span class="gray">{$Think.lang.f_reply}</span></a>
+            </div>
+        </div>
+    </volist>
+    </td></tr>
+</table>
+<div class="cp100 h10 clear"></div>
+<div class="c1200">
+    <div class="pages clear">{$page}</div>
+</div>
+
+
+<script type="text/javascript">
+<neq name="Think.get.parentid" value="">
+document.getElementById("content").focus();
+</neq>
+//评论字符限制
+function check(){
+  var content=document.comment_form.content.value;
+  if(document.getElementById("content").value.length<5){
+      alert("{$Think.lang.v_must_be_words}");
+      document.comment_form.content.focus();
+	  return false;
+  }
+}
+</script>
+<script type="text/javascript">
+//输入字数提示
+var LastCount =0;
+function CountStrByte(Message,Total,Used,Remain){ 
+ var ByteCount = 0;
+ var StrValue  = Message.value;
+ var StrLength = Message.value.length;
+ var MaxValue  = Total.value;
+ if(LastCount != StrLength) { 
+	for (i=0;i<StrLength;i++){
+		ByteCount  = (StrValue.charCodeAt(i)<=256) ? ByteCount + 1 : ByteCount + 2;
+      if (ByteCount>MaxValue) {
+      	Message.value = StrValue.substring(0,i);
+			alert("{$Think.lang.v_limit_note} " +MaxValue+ " {$Think.lang.v_byte}！\n{$Think.lang.v_tips_byte}。");
+         ByteCount = MaxValue;
+         break;
+      }
+	}
+   Used.value = ByteCount;
+   Remain.value = MaxValue - ByteCount;
+   LastCount = StrLength;
+ }
+}
+</script>
+<script type="text/javascript">
+//刷新验证码
+	$(function(){
+		var verify = $(".verify").attr("src");
+		$(".reloadverify").click(function(){
+			if( verify.indexOf('?')>0){
+				$(".verify").attr("src", verify+'&random='+Math.random());
+			}else{
+				$(".verify").attr("src", verify.replace(/\?.*$/,'')+'?'+Math.random());
+			}
+		});
+	});
+	
+</script>
+<script type="text/javascript">
+$(function(){
+	$(".zan").click(function(){
+		var love = $(this);
+		var id = love.attr("rel");
+		var rev = love.attr("rev");
+		love.fadeOut(300);
+		$.ajax({
+			type:"POST",
+			url:"{:U(CONTROLLER_NAME.'/zan')}",
+			data:"rev="+rev+"&id="+id,
+			cache:false,
+			success:function(data){
+			    alert(data);
+				love.html("<span class=\"gray\" style=\"cursor:pointer;\">"+data+"</span>");
+				love.fadeIn(300);
+			}
+		});
+		return false;
+	});
+});
+</script>
+<include file="Public:foot" />

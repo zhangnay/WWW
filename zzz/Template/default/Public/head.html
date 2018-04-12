@@ -1,0 +1,31 @@
+<!--头部-->
+<div class="top">
+    <div class="c1200">
+        <div class="fl gray">{$slogan}</div>
+        <div class="fr">
+	        <volist name="language" id="lanRs">
+		        <eq name="lanRs['isdefault']" value="1">
+                    <a href="/"><img src="{$lanRs['ico']}" width="18" height="10" border="0" class="mr5" />{$lanRs['viewname']}</a>&nbsp;&nbsp; 
+                <else/>
+                    <a href="/{$lanRs['mulu']}/"><img src="{$lanRs['ico']}" width="18" height="10" border="0" class="mr5" />{$lanRs['viewname']}</a>&nbsp;&nbsp; 
+                </eq>
+		    </volist>
+	    </div>
+	</div>
+</div>
+<div class="navall">
+    <div class="top_all">
+        <div class="logo"><a href="/"><img src="{$logo}" width="200" height="60" border="0" alt="" /></a></div>
+	    <div class="top_nav">
+	        <!--导航开始-->
+		    <div id="nav">
+		        <ul id="nav_E8gl38" class="navigation">
+                    <php>getNavList(0);</php>
+			    </ul>
+		    </div>
+            <script type="text/javascript" src="__HOME_JS__/jquery1.8.3.js"></script>
+		    <!--导航结束-->
+	    </div>
+    </div>
+</div>
+<!--头部-->

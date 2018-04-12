@@ -1,0 +1,151 @@
+<include file="Public:head" />
+<!--百度编辑器开始-->
+<script src="__PUBLIC__/js/jquery.js" type="text/javascript"></script>
+<script src="__PUBLIC__/ueditor/ueditor.config.js" type="text/javascript"></script>
+<script src="__PUBLIC__/ueditor/ueditor.all.min.js" type="text/javascript"></script>
+<if condition="I('get.lan') eq 'ch'">
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
+<else />
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/ueditor/lang/en/en.js"></script>
+</if>
+<!--百度编辑器结束-->
+        <!--容器 开始-->
+        <div class="page-container">
+            <!--侧边栏 开始-->
+            <div class="page-sidebar-wrapper">
+                <!--侧边栏 开始-->
+                <div class="page-sidebar navbar-collapse collapse">
+                    <include file="Public:globalleft" />
+                    <include file="Public:responseleft" />
+                </div>
+            <!--侧边栏 结束-->
+            </div>
+            <!--侧边栏 结束-->
+            <!--内容 开始-->
+            <div class="page-content-wrapper">
+                <!--内容主体 开始-->
+                <div class="page-content">
+                    <!--页面头部 开始-->
+                    <!--页面导航 开始-->
+                    <div class="page-bar">
+                        <ul class="page-breadcrumb">
+                            <li><span>{$Think.lang.v_global}</span><i class="fa fa-angle-right"></i></li>
+                            <li><span>{$Think.lang.v_global}</span><i class="fa fa-angle-right"></i></li>
+                            <li><span>{$Think.lang.v_chat}</span><i class="fa fa-angle-right"></i></li>
+                            <li><span><eq name="rs.id" value="">{$Think.lang.v_add}<else />{$Think.lang.v_edit}</eq> {$Think.lang.v_chat}</span></li>
+                        </ul>
+                    </div>
+                    <!--页面导航 结束-->
+                    <!--页面头部 结束-->
+                    <!--右侧主体 开始-->
+                    <div class="row margin-top-20">
+                        <div class="col-md-12">
+                            <form method="post" action="" class="form-horizontal" id="validationForm">
+                                <input type="hidden" name="id" value="{$rs.id}">
+                                <input type="hidden" name="lan" value="{:I('get.lan')}">
+                                <input type="hidden" name="fieldtype" value="<eq name="Think.get.fieldtype" value="">{$rs['fieldtype']}<else />{:I('get.fieldtype')}</eq>" />
+                                <div class="portlet bg-green bg-font-white">
+                                    <div class="portlet-body">
+                                        <div class="tabbable-bordered">
+                                            <div class="edit_nav_left">
+                                                <i class="fa fa-edit font-white"></i> <span class="font-white"><eq name="rs.id" value="">{$Think.lang.v_add}<else />{$Think.lang.v_edit}</eq> {$Think.lang.v_chat}</span>
+                                            </div>
+                                            <ul class="nav nav-tabs tabs-reversed"></ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="tab_general">
+                                                    <div class="form-body">
+                                                        <div class="alert alert-danger display-hide"><button class="close" data-close="alert"></button>{$Think.lang.v_error_tips}</div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">{$Think.lang.v_chattype}</label>
+                                                            <div class="col-md-4">
+                                                                <select name="chattype" class="form-control" data-style="btn-primary">
+									                                <option value="QQ"<eq name="rs.chattype" value="QQ"> selected="selected"</eq>>{$Think.lang.v_qq}</option>
+									                                <option value="MSN"<eq name="rs.chattype" value="MSN"> selected="selected"</eq>>{$Think.lang.v_msn}</option>
+									                                <option value="wangwang"<eq name="rs.chattype" value="wangwang"> selected="selected"</eq>>{$Think.lang.v_wangwang}</option>
+									                                <option value="Skype"<eq name="rs.chattype" value="Skype"> selected="selected"</eq>>{$Think.lang.v_skype}</option>
+									                                <option value="ICQ"<eq name="rs.chattype" value="ICQ"> selected="selected"</eq>>{$Think.lang.v_icq}</option>
+									                                <option value="Yahoo"<eq name="rs.chattype" value="Yahoo"> selected="selected"</eq>>{$Think.lang.v_yahoo}</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">{$Think.lang.v_img}</label>
+                                                            <div class="col-md-4">
+                                                                <div class="input-group"><input type="text" name="thumb" id="morepics1" value="{$rs['thumb']}" class="form-control" /><span class="input-group-btn"><input type="button" onClick="upImage1();" value=" {$Think.lang.v_upload_img} " class="btn green" /></span></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">{$Think.lang.v_chatname}</label>
+                                                            <div class="col-md-4">
+                                                                <input type="text" class="form-control" name="chatname" value="{$rs.chatname}" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">{$Think.lang.v_account}</label>
+                                                            <div class="col-md-4">
+                                                                <input type="text" class="form-control" name="account" value="{$rs.account}" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">{$Think.lang.v_sequence}</label>
+                                                            <div class="col-md-4">
+                                                                <div class="input-icon right"><i class="fa"></i><input type="text" class="form-control" name="sequence" value="<php>if(empty($rs['sequence'])){ echo "0"; }else{ echo $rs['sequence']; }</php>" onKeyDown="if(event.keyCode==13)event.returnValue=false" onChange="if(/\D/.test(this.value)){alert('{$Think.lang.v_require_number}！');this.value='0';}" /></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-actions">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <button type="submit" class="btn green"><i class="fa fa-check"></i> {$Think.lang.v_save}</button>
+                                                            <button type="button" class="btn default" onclick="javascript:history.back(-1);">{$Think.lang.v_goback}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--右侧主体 结束-->
+                </div>
+                <!--内容主体 结束-->
+            </div>
+            <!--内容 结束-->
+            <include file="Public:rightquickbar" />
+        </div>
+        <!--容器 结束-->
+<include file="Public:foot" />
+<!--图片上传开始-->
+<script type="text/plain" id="input_editor1" style="display:none;"></script>
+<script type="text/javascript">
+//弹出图片上传的对话框
+    var url='{:U('Syscore/Ueditor/Index')}';
+    //实例化编辑器
+    var upload_editor1 = UE.getEditor('input_editor1',{
+        serverUrl :url,
+        UEDITOR_HOME_URL:'/Public/ueditor/',
+    });
+function upImage1(){
+	  
+    upload_editor1.ready(function(){
+        upload_editor1.execCommand('serverparam', {
+        'userid': 'image',//图片子文件夹
+        });
+
+        upload_editor1.hide();//隐藏编辑器
+        //监听图片上传
+        upload_editor1.addListener('beforeInsertImage', function (t,arg){
+            document.getElementById("morepics1").value=arg[0].src;
+        });
+    });
+    //弹出图片上传的对话框
+    var myImage1 = upload_editor1.getDialog("insertimage");
+    myImage1.open();
+}
+</script>
+<!--图片上传结束-->
+</body>
+</html>

@@ -1,0 +1,272 @@
+<include file="Public:head" />
+<link href="__PUBLIC__/bootstrap/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/bootstrap/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+<!--百度编辑器开始-->
+<script src="__PUBLIC__/ueditor/ueditor.config.js" type="text/javascript"></script>
+<script src="__PUBLIC__/ueditor/ueditor.all.min.js" type="text/javascript"></script>
+<if condition="I('get.lan') eq 'ch'">
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
+<else />
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/ueditor/lang/en/en.js"></script>
+</if>
+<!--百度编辑器结束-->
+        <!--容器 开始-->
+        <div class="page-container">
+            <!--侧边栏 开始-->
+            <div class="page-sidebar-wrapper">
+                <!--侧边栏 开始-->
+                <div class="page-sidebar navbar-collapse collapse">
+                    <include file="Public:left" />
+                    <include file="Public:responseleft" />
+                </div>
+            <!--侧边栏 结束-->
+            </div>
+            <!--侧边栏 结束-->
+            <!--内容 开始-->
+            <div class="page-content-wrapper">
+                <!--内容主体 开始-->
+                <div class="page-content">
+                    <!--页面头部 开始-->
+                    <!--页面导航 开始-->
+                    <div class="page-bar">
+                        <ul class="page-breadcrumb">
+                            <li><span>{$Think.lang.v_home}</span><i class="fa fa-angle-right"></i></li>
+                            <li><span>
+						    <switch name="modulenav.module" >
+                                <case value="Product">{$Think.lang.v_product}</case>
+                                <case value="News">{$Think.lang.v_news}</case>
+                                <case value="Down">{$Think.lang.v_down}</case>
+                                <case value="Page">{$Think.lang.v_page_module}</case>
+                                <case value="Case">{$Think.lang.v_project}</case>
+                                <default />{$modulenav['modulename']}
+                            </switch>
+                            {$Think.lang.v_manage}</span><i class="fa fa-angle-right"></i></li>
+                            <li><span>
+						    <switch name="modulenav.module" >
+                                <case value="Product">{$Think.lang.v_product}</case>
+                                <case value="News">{$Think.lang.v_news}</case>
+                                <case value="Down">{$Think.lang.v_down}</case>
+                                <case value="Page">{$Think.lang.v_page_module}</case>
+                                <case value="Case">{$Think.lang.v_project}</case>
+                                <default />{$modulenav['modulename']}
+                            </switch>
+                            {$Think.lang.v_sort}</span><i class="fa fa-angle-right"></i></li>
+                            <li><span><eq name="rs.id" value="">{$Think.lang.v_add}<else />{$Think.lang.v_edit}</eq> {$Think.lang.v_sort}</span></li>
+                        </ul>
+                    </div>
+                    <!--页面导航 结束-->
+                    <!--页面头部 结束-->
+                    <!--右侧主体 开始-->
+                    <div class="row margin-top-20">
+                        <div class="col-md-12">
+                            <form method="post" action="" class="form-horizontal" id="validationForm">
+                                <input type="hidden" name="id" value="{$rs.id}">
+				                <input type="hidden" name="moduleid" value="{$moduleid}">
+				                <input type="hidden" name="lan" value="{:I('get.lan')}">
+                                <php>$isdisplay_array=explode(',',$modulenav['isdisplay']);</php>
+                                <div class="portlet bg-green bg-font-white">
+                                    <div class="portlet-body">
+                                        <div class="tabbable-bordered">
+                                            <div class="edit_nav_left">
+                                                <i class="fa fa-edit font-white"></i> <span class="font-white"><eq name="rs.id" value="">{$Think.lang.v_add}<else />{$Think.lang.v_edit}</eq> {$Think.lang.v_sort}</span>
+                                            </div>
+                                            <ul class="nav nav-tabs tabs-reversed"></ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="tab_general">
+                                                    <div class="form-body">
+                                                        <div class="alert alert-danger display-hide"><button class="close" data-close="alert"></button>{$Think.lang.v_error_tips}</div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">{$Think.lang.v_title}<span class="required" aria-required="true">*</span></label>
+                                                            <div class="col-md-5">
+                                                                <div class="input-icon right"><i class="fa"></i><input type="text" class="form-control" name="title" value="{$rs.title}" /></div>
+                                                            </div>
+                                                        </div>
+                                                        <if condition="(in_array('sortimg',$isdisplay_array))">
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3">{$Think.lang.v_img}</label>
+                                                                <div class="col-md-5">
+                                                                    <div class="input-group"><input name="thumb" id="morepics1" type="text" class="form-control" value="{$rs.thumb}" /> <span class="input-group-btn"><input type="button" value=" {$Think.lang.v_upload_img} " class="btn green" onclick="upImage1();"></span></div>
+                                                                </div>
+                                                            </div>
+                                                        </if>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">{$Think.lang.v_seo} {$Think.lang.v_title}</label>
+                                                            <div class="col-md-5">
+                                                                <input type="text" class="form-control" name="seotitle" value="{$rs.seotitle}" placeholder="{$Think.lang.v_seo_use_title}" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">{$Think.lang.v_keyword}</label>
+                                                            <div class="col-md-5">
+                                                                <input type="text" class="form-control" name="keyword" value="{$rs.keyword}" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">{$Think.lang.v_description}</label>
+                                                            <div class="col-md-5">
+                                                                <textarea name="description" class="form-control" rows="4">{$rs.description}</textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">{$Think.lang.v_parent_sort}</label>
+                                                            <div class="col-md-5">
+                                                                <select name="parentid" autocomplete="off" id="single" class="form-control select2">
+                                                                    <option>{$Think.lang.v_top_sort}</option>
+								                                    <foreach name="Sort" item="v">
+											                            <neq name="v['id']" value="$rs['id']">
+                                                                            <option value="{$v.id}" <if condition="$rs['parentid'] == $v['id']">selected="selected"</if>>{$v.html} {$v['title']}</option>
+                                                                        </neq>
+                                                                    </foreach>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-3">{$Think.lang.v_sequence}</label>
+                                                            <div class="col-md-5">
+                                                                <div class="input-icon right"><i class="fa"></i><input type="text" class="form-control" name="sequence" value="<eq name="rs.sequence" value="">0<else />{$rs.sequence}</eq>" onKeyDown="if(event.keyCode==13)event.returnValue=false" onChange="if(/\D/.test(this.value)){alert('{$Think.lang.v_require_number}！');this.value='0';}" /></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-actions">
+                                                    <div class="row">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <button type="submit" class="btn green"><i class="fa fa-check"></i> {$Think.lang.v_save}</button>
+                                                            <button type="button" class="btn default" onclick="javascript:history.back(-1);">{$Think.lang.v_goback}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--右侧主体 结束-->
+                </div>
+                <!--内容主体 结束-->
+            </div>
+            <!--内容 结束-->
+            <include file="Public:rightquickbar" />
+        </div>
+        <!--容器 结束-->
+<include file="Public:foot" />
+<script src="__PUBLIC__/bootstrap/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+<script src="__PUBLIC__/bootstrap/pages/scripts/components-select2.min.js" type="text/javascript"></script>
+<!--图片上传开始-->
+<script type="text/plain" id="input_editor1" style="display:none;"></script>
+<script type="text/javascript">
+//弹出图片上传的对话框
+    var url='{:U('Syscore/Ueditor/Index')}';
+    //实例化编辑器
+    var upload_editor1 = UE.getEditor('input_editor1',{
+        serverUrl :url,
+        UEDITOR_HOME_URL:'/Public/ueditor/',
+    });
+function upImage1(){
+	  
+    upload_editor1.ready(function(){
+        upload_editor1.execCommand('serverparam', {
+        'userid': 'image',//图片子文件夹
+        });
+
+        upload_editor1.hide();//隐藏编辑器
+        //监听图片上传
+        upload_editor1.addListener('beforeInsertImage', function (t,arg){
+            document.getElementById("morepics1").value=arg[0].src;
+        });
+    });
+    //弹出图片上传的对话框
+    var myImage1 = upload_editor1.getDialog("insertimage");
+    myImage1.open();
+}
+</script>
+<!--图片上传结束-->
+<!--表单验证 开始-->
+<script src="__PUBLIC__/bootstrap/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+var FormValidation = function () {
+    var handleValidation2 = function() {
+
+            var form2 = $('#validationForm');
+            var error2 = $('.alert-danger', form2);
+            var success2 = $('.alert-success', form2);
+
+            form2.validate({
+                errorElement: 'span',
+                errorClass: 'help-block help-block-error',
+                focusInvalid: false,
+                ignore: "",
+					
+                rules: {
+                    title: {
+                        minlength: 2,
+                        maxlength: 20,
+                        required: true
+                    },
+                },
+
+                invalidHandler: function (event, validator) {
+                    success2.hide();
+                    error2.show();
+                    App.scrollTo(error2, -200);
+                },
+
+                errorPlacement: function (error, element) {
+                    var icon = $(element).parent('.input-icon').children('i');
+                    icon.removeClass('fa-check').addClass("fa-warning");  
+                    icon.attr("data-original-title", error.text()).tooltip({'container': 'body'});
+                },
+
+                highlight: function (element) {
+                    $(element)
+                        .closest('.form-group').removeClass("has-success").addClass('has-error');
+                },
+
+                unhighlight: function (element) {
+                    
+                },
+
+                success: function (label, element) {
+                    var icon = $(element).parent('.input-icon').children('i');
+                    $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                    icon.removeClass("fa-warning").addClass("fa-check");
+                },
+
+                submitHandler: function (form) {
+                    success2.show();
+                    error2.hide();
+                    form[0].submit();
+                }
+            });
+
+    }
+
+    var handleWysihtml5 = function() {
+        if (!jQuery().wysihtml5) {
+            return;
+        }
+        if ($('.wysihtml5').size() > 0) {
+            $('.wysihtml5').wysihtml5({
+                "stylesheets": ["__PUBLIC__/bootstrap/global/plugins/bootstrap-wysihtml5/wysiwyg-color.css"]
+            });
+        }
+    }
+
+    return {
+        init: function () {
+            handleWysihtml5();
+            handleValidation2();
+        }
+    };
+
+}();
+
+jQuery(document).ready(function() {
+    FormValidation.init();
+});
+</script>
+<!--表单验证 结束-->
+</body>
+</html>

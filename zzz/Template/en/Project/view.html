@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$seotitle}</title>
+<meta name="keywords" content="{$rs['keyword']}" />
+<meta name="description" content="{$rs['description']}" />
+<link type="text/css" href="__HOME_CSS__/global.css" rel="stylesheet" />
+</head>
+<body>
+<include file="Public:head" />
+<div class="page_banner" style="background:url({$adRs['imgurl']}) center no-repeat;"></div>
+<div class="page_floor">
+    <div class="page_kong"></div>
+	<div class="c1200">
+	    <div class="page_left">
+		    <div class="page_left_nav"><img src="__HOME_IMG__/ico_1.png" width="25" align="absmiddle" class="mr10" />{$Think.lang.project}</div>
+<!--左侧菜单开始-->		
+<div class="leftnav">
+    <ul>
+        <php>getSortList(5);</php>
+    </ul>
+</div>
+<script language="JavaScript">
+function c(srcelement){
+    var targetid, srcelement, targetelement;
+    targetid = srcelement.id + "d";
+    targetelement = document.getElementById(targetid);
+    if(targetelement.style.display == "none"){
+        srcelement.className = "active";
+        targetelement.style.display = '';
+    }else{
+        srcelement.className = "";
+        targetelement.style.display = "none";
+    }
+}
+</script>
+<!--左侧菜单结束-->		
+			<div class="leftnav"><img src="__HOME_IMG__/contact_ico.jpg" border="0" alt="" class="contact_img" /></div>
+		</div>
+		<div class="page_right">
+		    <div class="page_right_nav">
+			    <div class="fl">{$Think.lang.v_position}{$Think.lang.v_home} &gt; {$Think.lang.project}{$sortnav}</div>
+				<div class="fr">
+				    <form name="formsearch" method="post" action="{:U(CONTROLLER_NAME.'/index')}"><input type="hidden" name="sortid" value="{:I('get.sortid')}"><input name="keyword" type="text" value="{$Think.lang.v_quickfind}……" onfocus="if (this.value == '{$Think.lang.v_quickfind}……') this.value = '';" onblur="if (this.value == '') this.value = '{$Think.lang.v_quickfind}……';" class="ipt"><input name="submitsearch" type="submit" value="" class="btn" /></form>
+				</div>
+			</div>
+			<div class="page_content">
+			    <div class="view_title" style="margin:20px 0 10px 0;">
+				    <h1 class="f18">{$rs['title']}</h1>
+				</div>
+			    <div class="project_content">
+				    {$rs['content1']|htmlspecialchars_decode}
+				</div>			    
+			    <div class="page_content">
+				    {$Think.lang.v_previous_page}：{$pre}<br />
+					{$Think.lang.v_next_page}：{$next}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="cp100 h10 clear"></div>
+<include file="Public:foot" />

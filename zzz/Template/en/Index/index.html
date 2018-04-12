@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>{$sitetitle}</title>
+<meta name="keywords" content="{$sitekeyword}" />
+<meta name="description" content="{$sitedescription}" />
+<link type="text/css" href="__HOME_CSS__/global.css" rel="stylesheet" />
+</head>
+<body>
+<include file="Public:head" />
+<!--banner开始-->
+<div id="slideBox" class="slideBox">
+    <div class="hd">
+	    <ul>
+            <volist name="adbanner" id="adRs">
+                <li></li>
+            </volist>
+        </ul>
+	</div>
+	<div class="bd">
+		<ul>
+            <volist name="adbanner" id="adRs">
+		        <li class="banner" style="background:url({$adRs.imgurl}) center no-repeat;"></li>
+            </volist>
+        </ul>
+	</div>
+	<a rel="nofollow" class="prev" href="javascript:void(0)"></a>
+	<a rel="nofollow" class="next" href="javascript:void(0)"></a>
+</div>
+<!--banner结束-->
+<div class="cp100 h10 clear"></div>
+<div class="floor">
+    <div class="fl370mr30">
+	    <div class="fl370h60">
+		    <span class="fl f16">{$Think.lang.v_about}</span>
+			<span class="fr"><a href="{:U('Page/view?id=227')}">&gt;&gt;{$Think.lang.v_detail}</a></span>
+		</div>
+		<div class="fl370">
+		    <img src="__HOME_IMG__/i1.jpg" width="370px" height="120" border="0" alt="" />
+		</div>
+		<div class="fl370px">
+            {$aboutus|htmlspecialchars_decode}
+		</div>
+	</div>
+    <div class="fl370mr30">
+	    <div class="fl370h60">
+		    <span class="fl f16">{$Think.lang.v_news}</span>
+			<span class="fr"><a href="{:U('News/index')}">&gt;&gt;{$Think.lang.v_more}</a></span>
+		</div>
+		<div class="fl370">
+		    <img src="__HOME_IMG__/i2.jpg" width="370px" height="120" border="0" alt="" />
+		</div>
+		<div class="fl370px">
+		    <ul>
+                <volist name="news" id="newsRs">
+                    <li><a href="{:U('News/view?id='.$newsRs['id'])}">{$newsRs['title']}</a><span><php>echo date("Y-m-d",$newsRs['addtime']);</php></span></li>
+                </volist>
+			</ul>
+		</div>
+	</div>
+    <div class="fl380">
+	    <div class="video_title">
+		    <span class="f16">{$Think.lang.v_video}</span>
+		</div>
+		<div class="video_bg">
+		<!--视频播放开始-->
+		    <div id="player"></div>
+			<script type="text/javascript" src="__HOME_JS__/jwplayer/jwplayer.js"></script>
+            <script type="text/javascript">
+                jwplayer("player").setup({
+                    stretching: "fill", 
+                    flashplayer: "__HOME_JS__/jwplayer/player.swf", 
+                    image: "__HOME_JS__/jwplayer/screen.jpg", 
+                    width: 360, 
+                    height: 210,
+                    levels: [{file: "{$video}"}] 
+                });
+            </script>
+		<!--视频播放结束-->
+		</div>
+	</div>
+</div>
+<div class="cp100 h10 clear"></div>
+<div class="cp100 h10 clear"></div>
+<div class="c1200">
+	{$Think.lang.v_links}：
+    <volist name="adfriend" id="adfriendRs">
+        <a href="{$adfriendRs['linkurl']}" target="_blank">{$adfriendRs['title']}</a>&nbsp;&nbsp;&nbsp;
+    </volist>
+</div>
+<include file="Public:foot" />
+<!--banner开始-->
+<script type="text/javascript" src="__HOME_JS__/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript">
+$(".slideBox").hover(function(){
+    $(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
+},
+function(){
+    $(this).find(".prev,.next").fadeOut()
+});
+	jQuery(".slideBox").slide({mainCell:".bd ul",effect:"leftLoop",autoPlay:true,interTime:5500});
+</script>
+<!--banner结束-->

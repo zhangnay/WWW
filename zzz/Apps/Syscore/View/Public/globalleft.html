@@ -1,0 +1,97 @@
+                    <!--侧边栏菜单 开始-->
+                    <ul class="page-sidebar-menu  page-header-fixed hidden-sm hidden-xs" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                        <li class="nav-item
+                            <switch name="Think.CONTROLLER_NAME">
+                                <case value="Guestbook|Field|Chat|Ad|Keywordlink|Navigation|Comment|Area|User"> active open</case>
+                            </switch>">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+				                <i class="icon-globe"></i>
+                                <span class="title">{$Think.lang.v_global}</span>
+                                <span class="selected"></span><span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item<eq name="Think.CONTROLLER_NAME" value="Field"> active open</eq>">
+                                    <a href="{:U('Field/index?lan='.I('get.lan'))}" class="nav-link "><i class="fa fa-list-alt"></i>{$Think.lang.v_field} {$Think.lang.v_manage}<eq name="Think.CONTROLLER_NAME" value="Field"><span class="fa fa-angle-right pull-right"></span></eq></a>
+                                </li>
+                                <li class="nav-item<eq name="Think.CONTROLLER_NAME" value="Guestbook"> active open</eq>">
+                                    <a href="{:U('Guestbook/index?lan='.I('get.lan'))}" class="nav-link "><i class="icon-notebook"></i> {$Think.lang.v_guestbook} {$Think.lang.v_manage}<eq name="Think.CONTROLLER_NAME" value="Guestbook"><span class="fa fa-angle-right pull-right"></span></eq></a>
+                                </li>
+                                <eq name="Think.config.chat" value="1">
+                                <li class="nav-item<eq name="Think.CONTROLLER_NAME" value="Chat"> active open</eq>">
+                                    <a href="{:U('Chat/index?lan='.I('get.lan'))}" class="nav-link "><i class="fa fa-comments"></i>{$Think.lang.v_chat}<eq name="Think.CONTROLLER_NAME" value="Chat"><span class="fa fa-angle-right pull-right"></span></eq></a>
+                                </li>
+                                </eq>
+                                <eq name="Think.config.advertisement" value="1">
+                                <li class="nav-item<eq name="Think.CONTROLLER_NAME" value="Ad"> active open</eq>">
+                                    <a href="{:U('Ad/index?lan='.I('get.lan'))}" class="nav-link "><i class="fa fa-bullhorn"></i>{$Think.lang.v_ad} {$Think.lang.v_manage}<eq name="Think.CONTROLLER_NAME" value="Ad"><span class="fa fa-angle-right pull-right"></span></eq></a>
+                                </li>
+                                </eq>
+                                <li class="nav-item<eq name="Think.CONTROLLER_NAME" value="Keywordlink"> active open</eq>">
+                                    <a href="{:U('Keywordlink/index?lan='.I('get.lan'))}" class="nav-link "><i class="fa fa-flag"></i>{$Think.lang.v_keyword} {$Think.lang.v_manage}<eq name="Think.CONTROLLER_NAME" value="Keywordlink"><span class="fa fa-angle-right pull-right"></span></eq></a>
+                                </li>
+                                <eq name="Think.config.navigation" value="1">
+                                <li class="nav-item<eq name="Think.CONTROLLER_NAME" value="Navigation"> active open</eq>">
+                                    <a href="{:U('Navigation/index?lan='.I('get.lan'))}" class="nav-link "><i class="fa fa-navicon"></i>{$Think.lang.v_navigation} {$Think.lang.v_manage}<eq name="Think.CONTROLLER_NAME" value="Navigation"><span class="fa fa-angle-right pull-right"></span></eq></a>
+                                </li>
+                                </eq>
+                                <eq name="Think.config.comment" value="1">
+                                <li class="nav-item<eq name="Think.CONTROLLER_NAME" value="Comment"> active open</eq>">
+                                    <a href="{:U('Comment/index?lan='.I('get.lan'))}" class="nav-link "><i class="fa fa-commenting-o"></i>{$Think.lang.v_comment} {$Think.lang.v_manage}<eq name="Think.CONTROLLER_NAME" value="Comment"><span class="fa fa-angle-right pull-right"></span></eq></a>
+                                </li>
+                                </eq>
+                                <eq name="Think.config.area" value="1">
+                                <li class="nav-item<eq name="Think.CONTROLLER_NAME" value="Area"> active open</eq>">
+                                    <a href="{:U('Area/index?lan='.I('get.lan'))}" class="nav-link "><i class="fa fa-map-marker"></i>{$Think.lang.v_area_manage}<eq name="Think.CONTROLLER_NAME" value="Area"><span class="fa fa-angle-right pull-right"></span></eq></a>
+                                </li>
+                                </eq>
+                                <li class="nav-item<eq name="Think.CONTROLLER_NAME" value="User"> active open</eq>">
+                                    <a href="{:U('User/index?lan='.I('get.lan'))}" class="nav-link "><i class="fa fa-user"></i>{$Think.lang.v_user_manage}<eq name="Think.CONTROLLER_NAME" value="User"><span class="fa fa-angle-right pull-right"></span></eq></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <if condition="$Think.config.authgroup eq 1 or $Think.config.authrule eq 1 or $Think.config.language eq 1 or $Think.config.module eq 1 or $Think.config.parametersetting eq 1 or $Think.config.databackup eq 1">
+                        <li class="nav-item
+                            <switch name="Think.CONTROLLER_NAME">
+                                <case value="AuthGroup|AuthRule|Language|Module|Setconfig|Databackup"> active open</case>
+                            </switch>">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+				                <i class="icon-settings"></i>
+                                <span class="title">{$Think.lang.v_system_manage}</span>
+                                <span class="selected"></span><span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <eq name="Think.config.authgroup" value="1">
+                                <li class="nav-item<eq name="Think.CONTROLLER_NAME" value="AuthGroup"> active open</eq>">
+                                    <a href="{:U('AuthGroup/index?lan='.I('get.lan'))}" class="nav-link "><i class="fa fa-users"></i>{$Think.lang.v_usergroup_manage}<eq name="Think.CONTROLLER_NAME" value="AuthGroup"><span class="fa fa-angle-right pull-right"></span></eq></a>
+                                </li>
+                                </eq>
+                                <eq name="Think.config.authrule" value="1">
+                                <li class="nav-item<eq name="Think.CONTROLLER_NAME" value="AuthRule"> active open</eq>">
+                                    <a href="{:U('AuthRule/index?lan='.I('get.lan'))}" class="nav-link "><i class="fa fa-briefcase"></i>{$Think.lang.v_auth_manage}<eq name="Think.CONTROLLER_NAME" value="AuthRule"><span class="fa fa-angle-right pull-right"></span></eq></a>
+                                </li>
+                                </eq>
+                                <eq name="Think.config.language" value="1">
+                                <li class="nav-item<eq name="Think.CONTROLLER_NAME" value="Language"> active open</eq>">
+                                    <a href="{:U('Language/index?lan='.I('get.lan'))}" class="nav-link "><i class="fa fa-language"></i>{$Think.lang.v_language_manage}<eq name="Think.CONTROLLER_NAME" value="Language"><span class="fa fa-angle-right pull-right"></span></eq></a>
+                                </li>
+                                </eq>
+                                <eq name="Think.config.module" value="1">
+                                <li class="nav-item<eq name="Think.CONTROLLER_NAME" value="Module"> active open</eq>">
+                                    <a href="{:U('Module/index?lan='.I('get.lan'))}" class="nav-link "><i class="fa fa-cubes"></i>{$Think.lang.v_module_manage}<eq name="Think.CONTROLLER_NAME" value="Module"><span class="fa fa-angle-right pull-right"></span></eq></a>
+                                </li>
+                                </eq>
+                                <eq name="Think.config.parametersetting" value="1">
+                                <li class="nav-item<eq name="Think.CONTROLLER_NAME" value="Setconfig"> active open</eq>">
+                                    <a href="{:U('Setconfig/index?lan='.I('get.lan'))}" class="nav-link "><i class="fa fa-cogs"></i>{$Think.lang.v_config_setting}<eq name="Think.CONTROLLER_NAME" value="Setconfig"><span class="fa fa-angle-right pull-right"></span></eq></a>
+                                </li>
+                                </eq>
+                                <eq name="Think.config.databackup" value="1">
+                                <li class="nav-item<eq name="Think.CONTROLLER_NAME" value="Databackup"> active open</eq>">
+                                    <a href="{:U('Databackup/index?lan='.I('get.lan'))}" class="nav-link "><i class="fa fa-database"></i>{$Think.lang.v_data} {$Think.lang.v_backup}<eq name="Think.CONTROLLER_NAME" value="Databackup"><span class="fa fa-angle-right pull-right"></span></eq></a>
+                                </li>
+                                </eq>
+                            </ul>
+                        </li>
+                        </if>
+                    </ul>
+                    <!--侧边栏菜单 结束-->
